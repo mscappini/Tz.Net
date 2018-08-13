@@ -40,24 +40,29 @@ using Tz.Net;
 
 namespace Tz.Net.Demo
 {
-	public async void Foo()
+	public class Foo
 	{
-		// Seed a wallet with mnemonic, email, and password.
-		var wallet = new Wallet(15WordMnemonic, Email, Password);
-
-		// Activates a wallet.
-		var activationResult = await wallet.Activate("<your activation code>");
-		
-		// Get the wallet balance.
-		var balance = await wallet.GetBalance();
-
-		// Send 2 tezzies from sending "from" address to recipient "to" address.
-		var transferOpResult = await wallet.Transfer(from: "tz1...", to: "tz1...", amount: 2, fee: 0);
+		public async void Bar()
+		{
+			// Seed a wallet with mnemonic, email, and password.
+			var wallet = new Wallet(15WordMnemonic, Email, Password);
+	
+			// Activates a wallet.
+			var activationResult = await wallet.Activate("<your activation code>");
+			
+			// Get the wallet balance.
+			var balance = await wallet.GetBalance();
+	
+			// Send 2 tezzies from sending "from" address to recipient "to" address.
+			var transferOpResult = await wallet.Transfer(from: "tz1...", to: "tz1...", amount: 2, fee: 0);
+		}
 	}
 }
 ```
 
 See the tests project for more examples.
+
+**NOTE:** The default connection is made to a locally running node at `http://localhost:8732`. Whatever node version is listening there will be on what network these calls are made (e.g. alphanet/zeronet/betanet).
 
 ## Testing
 

@@ -166,7 +166,7 @@ namespace Tz.Net
         /// <returns>The result of the activation operation.</returns>
         public async Task<OperationResult> Activate(string activationCode)
         {
-            return await new Rpc().Activate(Keys.PublicHash, activationCode);
+            return await new Rpc(Provider).Activate(Keys.PublicHash, activationCode);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Tz.Net
         /// <returns>The balance of the wallet.</returns>
         public async Task<BigFloat> GetBalance()
         {
-            return await new Rpc().GetBalance(Keys.PublicHash);
+            return await new Rpc(Provider).GetBalance(Keys.PublicHash);
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace Tz.Net
         /// <returns>The result of the transfer operation.</returns>
         public async Task<OperationResult> Transfer(string from, string to, BigFloat amount, BigFloat fee, BigFloat gasLimit = null, BigFloat storageLimit = null)
         {
-            return await new Rpc().SendTransaction(Keys, from, to, amount, fee, gasLimit, storageLimit);
+            return await new Rpc(Provider).SendTransaction(Keys, from, to, amount, fee, gasLimit, storageLimit);
         }
 
         /// <summary>
@@ -212,5 +212,15 @@ namespace Tz.Net
         /// The encrypted public/private keys.
         /// </summary>
         public Keys Keys { get; internal set; }
+
+        /// <summary>
+        /// This wallet's public hash.
+        /// </summary>
+        public string PublichHash => Keys?.PublicHash;
+
+        /// <summary>
+        /// Get or set the provider address to make RPC calls to. Default is http://localhost:8732.
+        /// </summary>
+        public string Provider { get; set; } = Rpc.DefaultProvider;
     }
 }

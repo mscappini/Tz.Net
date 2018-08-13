@@ -26,7 +26,7 @@ namespace Tz.Net
 
     public class Rpc
     {
-        private const string DefaultProvider = "http://localhost:8732";
+        public const string DefaultProvider = "http://localhost:8732";
 
         private static readonly HttpClient _client = new HttpClient();
         private static Dictionary<string, IOperationHandler> _opHandlers = new Dictionary<string, IOperationHandler>
